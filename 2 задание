@@ -1,0 +1,92 @@
+#include <iostream>
+#include <cmath>
+#include<time.h> 
+
+using namespace std;
+
+void print_array(int** array, int n, int m) {
+
+	for (int i = 0; i < n; i++) {
+
+		for (int j = 0; j < m; j++) {
+
+			cout << array[i][j] << " ";
+
+		}cout << endl;
+
+	}
+
+}
+
+void random_array(int** array, int n, int m) {
+
+	for (int i = 0; i < n; i++) {
+
+		for (int j = 0; j < m; j++) {
+
+			array[i][j] = rand() % 200 - 100;
+
+		}
+
+	}
+
+}
+
+void mass_array(int** array, int n, int m) {
+
+	int** mass = new int* [n];
+
+	for (int g = 0; g < n; g++) {
+
+		mass[g] = new int[m];
+
+	}
+
+	for (int i = 0; i < n; i++) {
+
+		for (int j = 0; j < m; j++) {
+
+			mass[i][j] = 0;
+
+		}
+
+	}
+
+	for (int g = 0; g < n; g++) {
+		for (int t = 0; t < m; t++) {
+			for (int r = 0; r < n; r++) {
+				mass[g][r] += array[g][r] * array[r][t];
+			}
+		}
+
+	}
+	print_array(mass, n, m);
+
+	delete[]mass;
+}
+
+int main() {
+
+	srand(time(0));
+
+	int n, m;
+
+	cin >> n >> m;
+
+	int** mas = new int* [n];
+
+	for (int i = 0; i < n; i++) {
+
+		mas[i] = new int[m];
+
+	}
+
+	random_array(mas, n, m);
+
+	print_array(mas, n, m);
+	cout << endl;
+
+	mass_array(mas, n, m);
+
+	delete[]mas;
+}
